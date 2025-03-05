@@ -1,4 +1,3 @@
-// controllers/login_controller.dart
 import 'package:flutter/material.dart';
 import '../screen/dashboard/dashboard.dart';
 import '../service/login_service.dart';
@@ -15,7 +14,7 @@ class LoginController with ChangeNotifier {
 
   Future<void> login(String email, String password, BuildContext context) async {
     _isLoading = true;
-    notifyListeners(); // Notify listeners about the state change
+    notifyListeners();
 
     try {
       final success = await _loginService.login(email, password);
@@ -25,15 +24,13 @@ class LoginController with ChangeNotifier {
           MaterialPageRoute(builder: (context) => const Dashboard()),
         );
       } else {
-        // Show error message for incorrect credentials
         debugPrint("Login failed: Incorrect email or password.");
       }
     } catch (e) {
-      // Handle errors (e.g., network issues)
       debugPrint("Login error: $e");
     } finally {
       _isLoading = false;
-      notifyListeners(); // Reset loading state
+      notifyListeners();
     }
   }
 }
